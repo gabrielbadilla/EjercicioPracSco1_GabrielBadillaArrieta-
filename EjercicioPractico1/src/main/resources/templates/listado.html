@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{template :: head}">
+        <title>tienda libros</title>
+    </head>
+    <body>
+        <header th:replace="~{template :: header}"/>
+
+        <section th:replace="~{libros/fragmentos :: botonesAgregar}"/>
+        <section th:replace="~{libros/fragmentos :: agregarCategoria}"/> 
+        <section th:replace="~{libros/fragmentos :: listadoCategorias}"/>
+
+        <footer th:replace="~{template :: footer}"/>      
+      
+    </body>
+</html>
