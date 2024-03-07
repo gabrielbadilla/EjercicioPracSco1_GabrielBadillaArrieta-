@@ -40,12 +40,8 @@
                               method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{libros.descripcion}]]</label>
+                                    <label for="descripcion">[[#{libros.titulo}]]</label>
                                     <input type="text" class="form-control" name="descripcion" required="true"/>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="activo">[[#{libros.activo}]]</label>
-                                    <input class="form-check-input" type="checkbox" name="activo" id="activo"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="imagen">[[#{libros.rutaImagen}]]</label>
@@ -63,7 +59,7 @@
         </section>
 
         <!-- 3 Sección principal para mostrar la informaccion de la entidad libros -->
-        <section th:fragment="listadolibro1" id="libro1">
+        <section th:fragment="listadolibro" id="libro">
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
@@ -71,29 +67,33 @@
                             <div class="card-header">
                                 <h4>[[#{libros.listado}]]</h4>
                             </div>
-                            <div th:if="${libro1 != null and !libro1.empty}">
+                            <div th:if="${libro != null and !libro.empty}">
                                 <table class="table table-striped table-hover">
                                     <thead class="table-dark">
                                         <tr><th>#</th>
-                                            <th>[[#{libros.descripcion}]]</th>
-                                            <th>[[#{libros.activo}]]</th>
-                                            <th></th></tr>
+                                            <th>[[#{libros.autor}]]</th>
+                                            <th>[[#{libros.titulo}]]</th>
+                                            <th>[[#{libros.precio}]]</th>
+                                            <th>[[#{libros.categoria}]]</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="libros, contador : ${libro1}">
+                                        <tr th:each="libros, contador : ${libro}">
                                             <td>[[${contador.count}]]</td>
-                                            <td>[[${libros.descripcion}]]</td>
-                                            <td th:text="${libros.activo} ? 'Activa' : 'Inactiva'" />
-                                            <td><a th:href="@{/libros/eliminar/}+${libros.idlibros}"
+                                            <td>[[${libros.autor}]]</td>
+                                            <td>[[${libros.titulo}]]</td>
+                                            <td>[[${libros.precio}]]</td>
+                                            <td>[[${libros.categoria}]]</td>
+                                            <td><a th:href="@{/libros/eliminar/}+${libros.id}"
                                                    class="btn btn-danger">
                                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
-                                                <a th:href="@{/libros/modificar/}+${libros.idlibros}"
+                                                <a th:href="@{/libros/modificar/}+${libros.id}"
                                                    class="btn btn-success">
                                                     <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]</a></td></tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="text-center p-2" th:if="${libro1 == null or libro1.empty}">
+                            <div class="text-center p-2" th:if="${libro == null or libro.empty}">
                                 <span>[[#{lista.vacia}]]</span>
                             </div>
                         </div>
@@ -102,7 +102,7 @@
                         <div class="card text-center bg-success text-white mb-3">
                             <div class="card-body">
                                 <h3>[[#{libros.total}]]</h3>
-                                <h4 class="fs-2"><i class="fas fa-users"></i> [[${totallibro1}]]</h4>
+                                <h4 class="fs-2"><i class="fas fa-users"></i> [[${totallibro}]]</h4>
                             </div>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
                           th:object="${libros}"
                           class="was-validated"                          
                           enctype="multipart/form-data">
-                        <input type="hidden" name="idlibros" th:field="*{idlibros}"/>
+                        <input type="hidden" name="id" th:field="*{id}"/>
                         <input type="hidden" name="rutaImagen" th:field="*{rutaImagen}"/>
                         <section th:replace="~{libros/fragmentos :: botonesEditar}"/>
                         <div id=details>
@@ -133,18 +133,10 @@
                                             </div>
                                             <div class="card-body">
                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{libros.descripcion}]]</label>
+                                                    <label for="descripcion">[[#{libros.categoria}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="activo">[[#{libros.activo}]]</label>
-                                                    <input class="form-check-input" 
-                                                           type="checkbox" 
-                                                           name="activo" 
-                                                           id="activo"
-                                                           th:field="*{activo}">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="imagen">[[#{libros.rutaImagen}]]</label>
@@ -172,7 +164,7 @@
                         </a>
                     </div>
                     <div class="col-md-4 d-grid">                                
-                        <a th:href="@{/libros/eliminar/}+${libros.idlibros}"
+                        <a th:href="@{/libros/eliminar/}+${libros.id}"
                            class="btn btn-danger">
                             <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
                         </a>

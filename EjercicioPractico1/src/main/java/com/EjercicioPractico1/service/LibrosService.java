@@ -6,6 +6,6 @@ import java.util.List;
 public interface LibrosService {
     
     // Se obtiene un listado de categorias en un List
-    public List<Libros> getLibros(boolean activos);
+    public List<Libros> getLibros();
  
 }

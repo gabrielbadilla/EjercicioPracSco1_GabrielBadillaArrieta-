@@ -15,12 +15,15 @@ public class Libros implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Long id;
+    private String autor;
     private String titulo;
+    private String precio;
+    private String categoria;
 
     public Libros() {
     }
 
-    public Libros(String libros) {
-        this.titulo = libros;
+    public Libros(String titulo) {
+        this.titulo = titulo;
     }
 }

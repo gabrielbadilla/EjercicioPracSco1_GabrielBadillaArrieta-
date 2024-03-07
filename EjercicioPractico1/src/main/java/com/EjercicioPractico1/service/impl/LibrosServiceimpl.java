@@ -16,8 +16,7 @@ public class LibrosServiceimpl implements LibrosService {
 
     @Override
     @Transactional(readOnly=true)
-    public List<Libros> getLibros(boolean activos) {
-        var lista=librosDao.findAll();
-        return lista;
+    public List<Libros> getLibros() {
+        return librosDao.findAll();
     }
 }

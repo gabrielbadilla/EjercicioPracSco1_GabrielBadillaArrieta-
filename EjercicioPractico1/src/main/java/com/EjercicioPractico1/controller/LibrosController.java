@@ -18,11 +18,13 @@ public class LibrosController {
 
     @GetMapping("/listado")
     public String inicio(Model model) {
-        var libro1 = librosService.getLibros(false);
-        System.out.print(librosService.getLibros(false));
+        var libro = librosService.getLibros();
+        
+        System.out.print(librosService.getLibros());
 
-        model.addAttribute("libro1", libro1);
-        model.addAttribute("totallibro1", libro1.size());
+        model.addAttribute("libro", libro);
+        model.addAttribute("totallibro", libro.size());
         return "/libros/listado";
+        
     }
 }
